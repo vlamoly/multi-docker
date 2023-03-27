@@ -1,0 +1,18 @@
+sudo: required
+services: 
+  - docker
+
+before_install:
+  - docker build -t vlamoly/react-test -f ./client/Dockerfile.dev ././client/Dockerfile.dev
+
+script: 
+  - docker run -e CI=true vlamoly/react-test npm test 
+
+after_success: 
+  - docker build -t vlamoly/multi-client ./client
+  - docker build -t vlamoly/multi-nginx ./nginx
+  - docker build -t vlamoly/multi-server ./server
+  - docker build -t vlamoly/multi-worker ./worker
+# Login to docker 
+  - echo "$DOCKER_PASSWORD"  | docker login -u "DOCKER_ID" --password-stdin
+# Push images to docker 
