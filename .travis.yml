@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t vlamoly/react-test -f ./client/Dockerfile.dev ./client/Dockerfile.dev
+  - docker build -t vlamoly/react-test -f ./client/Dockerfile.dev ./client
 
 script: 
   - docker run -e CI=true vlamoly/react-test npm test 
