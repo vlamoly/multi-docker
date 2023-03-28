@@ -15,7 +15,7 @@ after_success:
   - docker build -t vlamoly/multi-worker ./worker
 # Login to docker 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-# Push images to docker 
+# Push images to docker hub
   - docker push vlamoly/multi-client
   - docker push vlamoly/multi-nginx 
   - docker push vlamoly/multi-server
